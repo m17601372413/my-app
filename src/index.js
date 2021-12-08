@@ -1,17 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import './css/index.css'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const name = 'JSX'
+const age = 19
+const loading = false
+const loadData = () => {
+  if(loading) {
+    return 'loading...'
+  }
+  return '加载完毕'
+}
+const songs = [
+  {id: 1, name: 'AAAAAA'},
+  {id: 2, name: 'BBBBBB'},
+]
+const title = (
+  <div className="dv" style={{color: 'red', border: '1px solid blue', backgroundColor: 'skyblue'}}>
+    <h1>Hello {name}, 年龄： {age}</h1>
+    <p>{3>5? '大于':'小于等于'}</p>
+    <p>
+      条件渲染：
+      {loadData()}
+    </p>
+    
+    列表渲染：
+    <ul>
+      {songs.map(item => <li key={item.id}>{item.name}</li>)}
+    </ul>
+  </div>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(title, document.getElementById("root"));
