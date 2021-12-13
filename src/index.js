@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import img from "./images/cat.jpeg";
 // import './css/index.css'
 
 // const name = 'JSX'
@@ -23,7 +24,7 @@ import ReactDOM from "react-dom";
 //       条件渲染：
 //       {loadData()}
 //     </p>
-    
+
 //     列表渲染：
 //     <ul>
 //       {songs.map(item => <li key={item.id}>{item.name}</li>)}
@@ -53,5 +54,45 @@ import ReactDOM from "react-dom";
 // }
 // 导入组件
 // import Hello from "./components/index.js";
-import Comment from "./components/comment.js"; // 发表评论demo
-ReactDOM.render(<Comment/>, document.getElementById("root"));
+// import Comment from "./components/comment.js"; // 发表评论demo
+// import Parent from "./components/parent.js"; // 发表评论demo
+// ReactDOM.render(<Parent/>, document.getElementById("root"));
+
+import Mouse from "./components/mouse.js"; // render props模式
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>render props 模式</h1>
+        <Mouse>
+          {(mouse) => {
+            return (
+              <p>
+                鼠标位置：{mouse.x}, {mouse.y}
+              </p>
+            );
+          }}
+        </Mouse>
+        <Mouse>
+          {(mouse) => {
+            return (
+              <img
+                src={img}
+                alt="猫"
+                style={{
+                  width: "128px",
+                  height: "128px",
+                  position: "absolute",
+                  top: mouse.y - 64,
+                  left: mouse.x - 64,
+                }}
+              />
+            );
+          }}
+        </Mouse>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
